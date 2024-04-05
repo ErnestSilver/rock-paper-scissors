@@ -25,6 +25,37 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function playGame() {
+  let round = 0;
+  var playerScore = 0;
+  var computerScore = 0;
+  while (round < 5) {
+    const playerSelection = prompt("Your choice?: ");
+    const computerSelection = getComputerChoice();
+    var winner = playRound(playerSelection, computerSelection);
+    if (winner == "You won! Congratulations!") {
+      playerScore++;
+      console.log(winner);
+      console.log(`You: ${playerScore} Computer: ${computerScore}`);
+    } else if (winner == "You lost! Computer wins.") {
+      computerScore++;
+      console.log(winner);
+      console.log(`You: ${playerScore} Computer: ${computerScore}`);
+    } else {
+      playerScore++;
+      computerScore++;
+      console.log(winner);
+      console.log(`You: ${playerScore} Computer: ${computerScore}`);
+    }
+    round++;
+  }
+  if (playerScore > computerScore) {
+    console.log(`Total score ${playerScore} out of 5. You are the winner!`);
+  } else if (playerScore < computerScore) {
+    console.log(`Total score is ${playerScore} out of 5. Computer wins!`);
+  } else {
+    console.log("Draw!");
+  }
+}
+
+playGame();
