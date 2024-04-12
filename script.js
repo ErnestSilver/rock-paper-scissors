@@ -27,9 +27,40 @@ function playRound(playerSelection, computerSelection) {
 
 const buttons = document.querySelectorAll("button");
 const result = document.getElementById("result");
+const div = document.querySelector("div");
+const retryButton = document.createElement("button");
+let playerScore = 0;
+let computerScore = 0;
+let finalResult = "";
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     result.textContent = playRound(button.id, getComputerChoice());
+    switch (result.textContent) {
+      case "You won! Congratulations!":
+        playerScore += 1;
+        break;
+
+      case "You lost! Computer wins.":
+        computerScore += 1;
+        break;
+    }
+
+    const score = document.createElement("p");
+    result.appendChild(score);
+    score.textContent = `You: ${playerScore}  Computer: ${computerScore}`;
+    if (playerScore === 5) {
+      finalResult = "Congratulations! You are the ultimate winner!";
+    } else if (computerScore === 5) {
+      finalResult = "AI triumphs, humanity defeated!";
+    }
+
+    if (playerScore === 5 || computerScore === 5) {
+      buttons.forEach((button) => {
+        button.style.visibility = "hidden";
+      });
+
+      result.textContent = finalResult;
+    }
   });
 });
