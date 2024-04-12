@@ -28,7 +28,8 @@ function playRound(playerSelection, computerSelection) {
 const buttons = document.querySelectorAll("button");
 const result = document.getElementById("result");
 const div = document.querySelector("div");
-const retryButton = document.createElement("button");
+const retryButton = document.getElementById("retry");
+retryButton.style.visibility = "hidden";
 let playerScore = 0;
 let computerScore = 0;
 let finalResult = "";
@@ -61,6 +62,11 @@ buttons.forEach((button) => {
       });
 
       result.textContent = finalResult;
+      retryButton.style.visibility = "visible";
     }
   });
+});
+
+retryButton.addEventListener("click", () => {
+  location.reload();
 });
